@@ -1,5 +1,5 @@
 <template>
-  <div id="appt">
+  <div class="appt">
     {{ message }}
     <compx > </compx>
     <compy> </compy>
@@ -24,8 +24,8 @@ export default {
 </script>
 
 <style>
-#appt {
-  font-size: 50px;
+.appt {
+  font-size: 12px;
   font-family: 'Roboto', sans-serif;
   color: blue;
 }

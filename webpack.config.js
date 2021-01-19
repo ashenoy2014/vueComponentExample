@@ -6,9 +6,64 @@ module.exports = {
   entry: './src/main.js',
   module: {
     rules: [
+      /*
       { test: /\.js$/, use: 'babel-loader' },
       { test: /\.vue$/, use: 'vue-loader' },
       { test: /\.css$/, use: ['vue-style-loader', 'css-loader']},
+      */
+     {
+      test: /\.css$/,
+      use: [
+        'vue-style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            esModule: false  // TODO: workaround, otherwise replace `vue-style-loader` with `style-loader`
+          }
+        }
+      ],
+    },
+    {
+      test: /\.s(c|a)ss$/,
+      use: [
+        'vue-style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            esModule: false  // TODO: workaround, otherwise replace `vue-style-loader` with `style-loader`
+          }
+        },
+        {
+          loader: 'sass-loader',
+          // Requires sass-loader@^7.0.0
+          options: {
+            implementation: require('sass'),
+            indentedSyntax: true // optional
+          },
+          // Requires sass-loader@^8.0.0
+          options: {
+            implementation: require('sass'),
+            sassOptions: {
+              indentedSyntax: true // optional
+            },
+          },
+        }
+      ],
+    },
+    {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+        }
+        // other vue-loader options go here
+      }
+    },
+    {
+      test: /\.js$/,
+      loader: 'babel-loader',
+      exclude: /node_modules/
+    },
     ]
   },
   devServer: {
